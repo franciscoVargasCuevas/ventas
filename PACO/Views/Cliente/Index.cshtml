@@ -1,0 +1,44 @@
+﻿@model List<PACO.Models.ViewModels.ClienteViewModel>
+@{
+    ViewBag.Title = "Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Nombre</td>
+                    <td>Apellidos</td>
+                    <td>Dirección</td>
+                    <td>EVENTOS</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.nombre</td>
+                    <td>@item.apellidos</td>
+                    <td>@item.direccion</td>
+                    <td>
+                        <a class="btn btn-primary" href="~/Cliente/Editar/@item.id">Editar</a>
+                        <a class="btn btn-danger" href="~/Cliente/Eliminar/@item.id">Eliminar</a>
+                    </td>
+                </tr>
+                }
+               
+            </tbody>
+        </table>
+        <div class="row flex-xxl-grow-1">
+            <a href="~/Cliente/Nuevo" class="btn btn-primary">NUEVO REGISTRO</a>
+        </div>
+    </div>
+
+
+</div>

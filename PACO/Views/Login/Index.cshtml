@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "LOGIN";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nuevo cliente</h2>
+
+@using (Html.BeginForm("Ingresar", "Login", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+             
+            @Html.Label("Nombre cliente: ")
+           @Session["cliente"]  = @Html.TextBox( "", new { @class = "form-control" })
+            
+
+        </div>
+        <div style="text-align:right">
+            <input value="Ingresar" class="btn btn-primary" type="submit" />
+        </div>
+    </div>
+}

@@ -1,0 +1,24 @@
+﻿@model PACO.Models.ViewModels.TiendaViewModel
+@{
+    ViewBag.Title = "Nuevo tienda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nueva tienda</h2>
+
+@using (Html.BeginForm("Nuevo", "Tienda", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+
+            @Html.LabelFor(d => d.sucursal )
+            @Html.TextBoxFor(d => d.sucursal, "", new { @class = "form-control" })
+            @Html.LabelFor(d => d.direccion)
+            @Html.TextBoxFor(d => d.direccion, "", new { @class = "form-control" })
+            
+        </div>
+        <div style="text-align:right">
+            <input value="Guardar tienda" class="btn btn-primary" type="submit" />
+        </div>
+    </div>
+}

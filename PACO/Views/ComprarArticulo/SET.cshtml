@@ -1,0 +1,32 @@
+﻿@model PACO.Models.ViewModels.ArticuloViewModel
+@{
+    ViewBag.Title = "Carrito de compra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(function () {
+        $("#my-dialog-id").dialog(); //Here I select a div with id my-dialog-id and start the plugin.
+    });
+</script>
+<h2>Carrito</h2>
+
+@using (Html.BeginForm("COMPRAR", "ComprarArticulo", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+
+            @Html.LabelFor(d => d.codigo)
+            @Html.TextBoxFor(d => d.codigo, "", new { @readonly = "readonly" })
+            
+            @Html.LabelFor(d => d.descripcion)
+            @Html.TextBoxFor(d => d.descripcion, "", new { @readonly = "readonly" })
+            @Html.LabelFor(d => d.stock)
+            @Html.TextBoxFor(d => d.stock, "", new { @readonly = "readonly" })
+
+        </div>
+        <div style="text-align:right">
+            <input value="Comprar" class="btn btn-primary" type="submit" />
+        </div>
+    </div>
+}
+

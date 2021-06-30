@@ -1,0 +1,47 @@
+﻿@model List<PACO.Models.ViewModels.ArticuloViewModel>
+@{
+    ViewBag.Title = "Articulos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+  
+    <div class="col-md-12">
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Código</td>
+                    <td>Descripción</td>
+                    <td>Precio</td>
+                    <td>Imagen</td>
+                    <td>Stock</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.codigo</td>
+                        <td>@item.descripcion</td>
+                        <td>@item.precio</td>
+                        <td>@item.imagen</td>
+
+                        <td>@item.stock</td>
+                        <td>
+                            <a class="btn btn-danger" style="text-align:right" href="~/ComprarArticulo/SET/@item.id">Agregar a carrito</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+       
+    </div>
+
+
+</div>

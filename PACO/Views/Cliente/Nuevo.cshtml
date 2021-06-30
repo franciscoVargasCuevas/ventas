@@ -1,0 +1,26 @@
+﻿@model PACO.Models.ViewModels.ClienteViewModel
+@{
+    ViewBag.Title = "Nuevo cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nuevo cliente</h2>
+
+@using (Html.BeginForm("Nuevo", "Cliente", FormMethod.Post))
+{
+<div class="row">
+    <div class="col-md-12">
+       
+        @Html.LabelFor(d => d.nombre)
+        @Html.TextBoxFor(d => d.nombre, "", new { @class = "form-control" })
+        @Html.LabelFor(d => d.apellidos)
+        @Html.TextBoxFor(d => d.apellidos, "", new { @class = "form-control" })
+        @Html.LabelFor(d => d.direccion)
+        @Html.TextBoxFor(d => d.direccion, "", new { @class = "form-control" })
+
+    </div>
+    <div style="text-align:right">
+        <input value="Guardar cliente" class="btn btn-primary" type="submit" />
+    </div>
+</div>
+}

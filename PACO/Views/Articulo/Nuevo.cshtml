@@ -1,0 +1,30 @@
+﻿@model PACO.Models.ViewModels.ArticuloViewModel
+@{
+    ViewBag.Title = "Nuevo articulo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nuevo articulo</h2>
+
+@using (Html.BeginForm("Nuevo", "Articulo", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+
+            @Html.LabelFor(d => d.codigo)
+            @Html.TextBoxFor(d => d.codigo, "", new { @class = "form-control" })
+            @Html.LabelFor(d => d.descripcion)
+            @Html.TextBoxFor(d => d.descripcion, "", new { @class = "form-control" })
+            @Html.LabelFor(d => d.precio)
+            @Html.TextBoxFor(d => d.precio, "", new { @class = "form-control" })
+            @Html.LabelFor(d => d.imagen)
+            @Html.TextBoxFor(d => d.imagen, "", new { @class = "form-control" })
+            @Html.LabelFor(d => d.stock)
+            @Html.TextBoxFor(d => d.stock, "", new { @class = "form-control" })
+
+        </div>
+        <div style="text-align:right">
+            <input value="Guardar articulo" class="btn btn-primary" type="submit" />
+        </div>
+    </div>
+}

@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VENTAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ARTICULOS">
+          <Key>
+            <PropertyRef Name="ID_ARTICULO" />
+          </Key>
+          <Property Name="ID_ARTICULO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODIGO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PRECIO" Type="float" Nullable="false" />
+          <Property Name="IMAGEN" Type="varbinary(max)" />
+          <Property Name="STOCK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APELLIDOS" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REL_CLIENTE_ARTICULO">
+          <Key>
+            <PropertyRef Name="ID_REL_CLIENTE_ARTICULO" />
+          </Key>
+          <Property Name="ID_REL_CLIENTE_ARTICULO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="ID_ARTICULO" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REL_TIENDA_ARTICULO">
+          <Key>
+            <PropertyRef Name="ID_REL_TIENDA_ARTICULO" />
+          </Key>
+          <Property Name="ID_REL_TIENDA_ARTICULO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_ARTICULO" Type="int" Nullable="false" />
+          <Property Name="ID_TIENDA" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIENDA">
+          <Key>
+            <PropertyRef Name="ID_TIENDA" />
+          </Key>
+          <Property Name="ID_TIENDA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SUCURSAL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_REL_CLIENTE_ARTICULO_ARTICULOS">
+          <End Role="ARTICULOS" Type="Self.ARTICULOS" Multiplicity="1" />
+          <End Role="REL_CLIENTE_ARTICULO" Type="Self.REL_CLIENTE_ARTICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTICULOS">
+              <PropertyRef Name="ID_ARTICULO" />
+            </Principal>
+            <Dependent Role="REL_CLIENTE_ARTICULO">
+              <PropertyRef Name="ID_ARTICULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REL_CLIENTE_ARTICULO_CLIENTES">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+          <End Role="REL_CLIENTE_ARTICULO" Type="Self.REL_CLIENTE_ARTICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="REL_CLIENTE_ARTICULO">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REL_TIENDA_ARTICULO_ARTICULOS">
+          <End Role="ARTICULOS" Type="Self.ARTICULOS" Multiplicity="1" />
+          <End Role="REL_TIENDA_ARTICULO" Type="Self.REL_TIENDA_ARTICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTICULOS">
+              <PropertyRef Name="ID_ARTICULO" />
+            </Principal>
+            <Dependent Role="REL_TIENDA_ARTICULO">
+              <PropertyRef Name="ID_ARTICULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REL_TIENDA_ARTICULO_TIENDA">
+          <End Role="TIENDA" Type="Self.TIENDA" Multiplicity="1" />
+          <End Role="REL_TIENDA_ARTICULO" Type="Self.REL_TIENDA_ARTICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIENDA">
+              <PropertyRef Name="ID_TIENDA" />
+            </Principal>
+            <Dependent Role="REL_TIENDA_ARTICULO">
+              <PropertyRef Name="ID_TIENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VENTAModelStoreContainer">
+          <EntitySet Name="ARTICULOS" EntityType="Self.ARTICULOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REL_CLIENTE_ARTICULO" EntityType="Self.REL_CLIENTE_ARTICULO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REL_TIENDA_ARTICULO" EntityType="Self.REL_TIENDA_ARTICULO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIENDA" EntityType="Self.TIENDA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_REL_CLIENTE_ARTICULO_ARTICULOS" Association="Self.FK_REL_CLIENTE_ARTICULO_ARTICULOS">
+            <End Role="ARTICULOS" EntitySet="ARTICULOS" />
+            <End Role="REL_CLIENTE_ARTICULO" EntitySet="REL_CLIENTE_ARTICULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REL_CLIENTE_ARTICULO_CLIENTES" Association="Self.FK_REL_CLIENTE_ARTICULO_CLIENTES">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="REL_CLIENTE_ARTICULO" EntitySet="REL_CLIENTE_ARTICULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REL_TIENDA_ARTICULO_ARTICULOS" Association="Self.FK_REL_TIENDA_ARTICULO_ARTICULOS">
+            <End Role="ARTICULOS" EntitySet="ARTICULOS" />
+            <End Role="REL_TIENDA_ARTICULO" EntitySet="REL_TIENDA_ARTICULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REL_TIENDA_ARTICULO_TIENDA" Association="Self.FK_REL_TIENDA_ARTICULO_TIENDA">
+            <End Role="TIENDA" EntitySet="TIENDA" />
+            <End Role="REL_TIENDA_ARTICULO" EntitySet="REL_TIENDA_ARTICULO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VENTAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ARTICULOS">
+          <Key>
+            <PropertyRef Name="ID_ARTICULO" />
+          </Key>
+          <Property Name="ID_ARTICULO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODIGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRECIO" Type="Double" Nullable="false" />
+          <Property Name="IMAGEN" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="STOCK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="REL_CLIENTE_ARTICULO" Relationship="Self.FK_REL_CLIENTE_ARTICULO_ARTICULOS" FromRole="ARTICULOS" ToRole="REL_CLIENTE_ARTICULO" />
+          <NavigationProperty Name="REL_TIENDA_ARTICULO" Relationship="Self.FK_REL_TIENDA_ARTICULO_ARTICULOS" FromRole="ARTICULOS" ToRole="REL_TIENDA_ARTICULO" />
+        </EntityType>
+        <EntityType Name="CLIENTES">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="REL_CLIENTE_ARTICULO" Relationship="Self.FK_REL_CLIENTE_ARTICULO_CLIENTES" FromRole="CLIENTES" ToRole="REL_CLIENTE_ARTICULO" />
+        </EntityType>
+        <EntityType Name="REL_CLIENTE_ARTICULO">
+          <Key>
+            <PropertyRef Name="ID_REL_CLIENTE_ARTICULO" />
+          </Key>
+          <Property Name="ID_REL_CLIENTE_ARTICULO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="ID_ARTICULO" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ARTICULOS" Relationship="Self.FK_REL_CLIENTE_ARTICULO_ARTICULOS" FromRole="REL_CLIENTE_ARTICULO" ToRole="ARTICULOS" />
+          <NavigationProperty Name="CLIENTES" Relationship="Self.FK_REL_CLIENTE_ARTICULO_CLIENTES" FromRole="REL_CLIENTE_ARTICULO" ToRole="CLIENTES" />
+        </EntityType>
+        <EntityType Name="REL_TIENDA_ARTICULO">
+          <Key>
+            <PropertyRef Name="ID_REL_TIENDA_ARTICULO" />
+          </Key>
+          <Property Name="ID_REL_TIENDA_ARTICULO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_ARTICULO" Type="Int32" Nullable="false" />
+          <Property Name="ID_TIENDA" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ARTICULOS" Relationship="Self.FK_REL_TIENDA_ARTICULO_ARTICULOS" FromRole="REL_TIENDA_ARTICULO" ToRole="ARTICULOS" />
+          <NavigationProperty Name="TIENDA" Relationship="Self.FK_REL_TIENDA_ARTICULO_TIENDA" FromRole="REL_TIENDA_ARTICULO" ToRole="TIENDA" />
+        </EntityType>
+        <EntityType Name="TIENDA">
+          <Key>
+            <PropertyRef Name="ID_TIENDA" />
+          </Key>
+          <Property Name="ID_TIENDA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SUCURSAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="REL_TIENDA_ARTICULO" Relationship="Self.FK_REL_TIENDA_ARTICULO_TIENDA" FromRole="TIENDA" ToRole="REL_TIENDA_ARTICULO" />
+        </EntityType>
+        <Association Name="FK_REL_CLIENTE_ARTICULO_ARTICULOS">
+          <End Role="ARTICULOS" Type="Self.ARTICULOS" Multiplicity="1" />
+          <End Role="REL_CLIENTE_ARTICULO" Type="Self.REL_CLIENTE_ARTICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTICULOS">
+              <PropertyRef Name="ID_ARTICULO" />
+            </Principal>
+            <Dependent Role="REL_CLIENTE_ARTICULO">
+              <PropertyRef Name="ID_ARTICULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REL_TIENDA_ARTICULO_ARTICULOS">
+          <End Role="ARTICULOS" Type="Self.ARTICULOS" Multiplicity="1" />
+          <End Role="REL_TIENDA_ARTICULO" Type="Self.REL_TIENDA_ARTICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTICULOS">
+              <PropertyRef Name="ID_ARTICULO" />
+            </Principal>
+            <Dependent Role="REL_TIENDA_ARTICULO">
+              <PropertyRef Name="ID_ARTICULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REL_CLIENTE_ARTICULO_CLIENTES">
+          <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="1" />
+          <End Role="REL_CLIENTE_ARTICULO" Type="Self.REL_CLIENTE_ARTICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTES">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="REL_CLIENTE_ARTICULO">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REL_TIENDA_ARTICULO_TIENDA">
+          <End Role="TIENDA" Type="Self.TIENDA" Multiplicity="1" />
+          <End Role="REL_TIENDA_ARTICULO" Type="Self.REL_TIENDA_ARTICULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIENDA">
+              <PropertyRef Name="ID_TIENDA" />
+            </Principal>
+            <Dependent Role="REL_TIENDA_ARTICULO">
+              <PropertyRef Name="ID_TIENDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VENTAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ARTICULOS" EntityType="Self.ARTICULOS" />
+          <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" />
+          <EntitySet Name="REL_CLIENTE_ARTICULO" EntityType="Self.REL_CLIENTE_ARTICULO" />
+          <EntitySet Name="REL_TIENDA_ARTICULO" EntityType="Self.REL_TIENDA_ARTICULO" />
+          <EntitySet Name="TIENDA" EntityType="Self.TIENDA" />
+          <AssociationSet Name="FK_REL_CLIENTE_ARTICULO_ARTICULOS" Association="Self.FK_REL_CLIENTE_ARTICULO_ARTICULOS">
+            <End Role="ARTICULOS" EntitySet="ARTICULOS" />
+            <End Role="REL_CLIENTE_ARTICULO" EntitySet="REL_CLIENTE_ARTICULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REL_TIENDA_ARTICULO_ARTICULOS" Association="Self.FK_REL_TIENDA_ARTICULO_ARTICULOS">
+            <End Role="ARTICULOS" EntitySet="ARTICULOS" />
+            <End Role="REL_TIENDA_ARTICULO" EntitySet="REL_TIENDA_ARTICULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REL_CLIENTE_ARTICULO_CLIENTES" Association="Self.FK_REL_CLIENTE_ARTICULO_CLIENTES">
+            <End Role="CLIENTES" EntitySet="CLIENTES" />
+            <End Role="REL_CLIENTE_ARTICULO" EntitySet="REL_CLIENTE_ARTICULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REL_TIENDA_ARTICULO_TIENDA" Association="Self.FK_REL_TIENDA_ARTICULO_TIENDA">
+            <End Role="TIENDA" EntitySet="TIENDA" />
+            <End Role="REL_TIENDA_ARTICULO" EntitySet="REL_TIENDA_ARTICULO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VENTAModelStoreContainer" CdmEntityContainer="VENTAEntities">
+          <EntitySetMapping Name="ARTICULOS">
+            <EntityTypeMapping TypeName="VENTAModel.ARTICULOS">
+              <MappingFragment StoreEntitySet="ARTICULOS">
+                <ScalarProperty Name="ID_ARTICULO" ColumnName="ID_ARTICULO" />
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="IMAGEN" ColumnName="IMAGEN" />
+                <ScalarProperty Name="STOCK" ColumnName="STOCK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTES">
+            <EntityTypeMapping TypeName="VENTAModel.CLIENTES">
+              <MappingFragment StoreEntitySet="CLIENTES">
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REL_CLIENTE_ARTICULO">
+            <EntityTypeMapping TypeName="VENTAModel.REL_CLIENTE_ARTICULO">
+              <MappingFragment StoreEntitySet="REL_CLIENTE_ARTICULO">
+                <ScalarProperty Name="ID_REL_CLIENTE_ARTICULO" ColumnName="ID_REL_CLIENTE_ARTICULO" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="ID_ARTICULO" ColumnName="ID_ARTICULO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REL_TIENDA_ARTICULO">
+            <EntityTypeMapping TypeName="VENTAModel.REL_TIENDA_ARTICULO">
+              <MappingFragment StoreEntitySet="REL_TIENDA_ARTICULO">
+                <ScalarProperty Name="ID_REL_TIENDA_ARTICULO" ColumnName="ID_REL_TIENDA_ARTICULO" />
+                <ScalarProperty Name="ID_ARTICULO" ColumnName="ID_ARTICULO" />
+                <ScalarProperty Name="ID_TIENDA" ColumnName="ID_TIENDA" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIENDA">
+            <EntityTypeMapping TypeName="VENTAModel.TIENDA">
+              <MappingFragment StoreEntitySet="TIENDA">
+                <ScalarProperty Name="ID_TIENDA" ColumnName="ID_TIENDA" />
+                <ScalarProperty Name="SUCURSAL" ColumnName="SUCURSAL" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

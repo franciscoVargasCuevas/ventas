@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PACO", "PACO\PACO.csproj", "{844B9E2D-494D-494C-BC6E-A51019F62105}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{844B9E2D-494D-494C-BC6E-A51019F62105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{844B9E2D-494D-494C-BC6E-A51019F62105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{844B9E2D-494D-494C-BC6E-A51019F62105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{844B9E2D-494D-494C-BC6E-A51019F62105}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05172A2D-DA21-4D62-ACEF-DBB31D599344}
+	EndGlobalSection
+EndGlobal
